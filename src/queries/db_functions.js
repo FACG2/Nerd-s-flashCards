@@ -1,11 +1,11 @@
 const connection = require('../database/db_connection.js');
 
 const { createHash } = require('crypto');
-let obj = {
-  name: '',
-  usaname: '',
-  password: ''
-};
+// let obj = {
+//   name: '',
+//   usaname: '',
+//   password: ''
+// };
 
 // const getUser(name)
 
@@ -67,7 +67,7 @@ const login = (name, password, cb) => {
   checkUser(name, (err, res) => {
     if (err) {
       cb(err);
-    } else if (res.length != 0) { // /// user exist
+    } else if (res.length !== 0) { // /// user exist
       if (hashedPassword === res[0].password) { // /// check the password
         cb(null, res);
         // getUserTopic(res.id, (err, res) => {

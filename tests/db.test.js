@@ -1,10 +1,6 @@
 const func = require('../src/queries/db_functions.js');
 
 const test = require('tape');
-const {
-  register,
-  checkUser
-} = require('../src/queries/db_functions.js');
 
 test('Testing the checkuser function Query', (t) => {
   func.checkUser('qqq', (err, data) => {

@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/FACG2/Nerd-s-flashCards/issues"
   },
-  "homepage": "https://github.com/FACG2/Nerd-s-flashCards#readme"
+  "homepage": "https://github.com/FACG2/Nerd-s-flashCards#readme",
+  "dependencies": {
+    "semistandard": "^11.0.0"
+  }
 }
