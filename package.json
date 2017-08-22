@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "directories": {
-    "test": "tests",
+    "test": "tests"
   },
   "devDependencies": {
     "env2": "^2.2.0",
@@ -20,7 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "semistandard --fix"
   },
-  "pre-commit":[
+  "pre-commit": [
     "lint"
   ],
   "repository": {
@@ -32,5 +32,5 @@
   "bugs": {
     "url": "https://github.com/FACG2/Nerd-s-flashCards/issues"
   },
-  "homepage": "https://github.com/FACG2/Nerd-s-flashCards#readme",
+  "homepage": "https://github.com/FACG2/Nerd-s-flashCards#readme"
 }
