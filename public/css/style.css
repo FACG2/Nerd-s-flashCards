@@ -1,6 +1,7 @@
 body{
   background-color: #eaebed;
-    font-family: sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+
 
 }
 
@@ -8,38 +9,79 @@ body{
   margin:0 auto;
   width: 73%;
 }
-
+hr {
+    border-width: 1.5px;
+    width: 40%;
+    border-color: #ecf0f1;
+}
 /*start signlogup*/
 
 .signlogup{
   text-align: center;
-  background-color: #d6d6d6;
+  background-color: #34495e;
   font-size: 0;
   margin-top: 70px;
-  padding:20px 0;
-  width: 300px;
+  padding:20px 20px;
+  width: 40%;
   margin: 150px auto 0 auto;
+  border-radius: 10px;
 }
 .signlogup input, .signlogup button{
   margin: 7px auto;
   display: block;
+
 }
 
+#login{
+  border-right: solid 1.5px white;
+  cursor: pointer;
 
+}
+#signUp{
+  cursor: pointer;
+
+}
 .signlogup button{
-   padding: 2.5px 13px;
-}
-.signlogup input{
-  height: 23px;
-  width: 241px;
+  padding: 10px;
+  width: 25%;
+  background: #7f8c8d;
+  color: white;
   text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 5%;
+  font-family: 'Titillium Web', sans-serif;
+
+
+
+}
+ .signlogup button:hover{
+  background-color: #1abc9c;
+
+}
+
+.signlogup input{
+  /*height: 40%;
+  width: 45%;
+  text-align: center;
+  font-size: 18px;*/
+  border: none;
+width: 45%;
+padding: 10px;
+font-size: 24px;
+margin-bottom:2%;
+font-family: 'Titillium Web', sans-serif;
+
+
+
 }
 .signlogup span{
   padding: 10px 36px;
-  background-color: #000;
+  background-color: #16a085;
   margin: 0;
   color: #fff;
-  font-size: 18px;
+  font-size: 21px;
 }
 
 .signlogup form{
@@ -47,13 +89,10 @@ body{
 }
 
 .signlogup span:hover{
-  background-color: #424242
+  background-color: #1abc9c;
 }
 
 .signBar{
   margin: 20px 0;
 }
 /*end signlogup*/
-
-
-

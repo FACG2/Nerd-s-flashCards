@@ -65,10 +65,16 @@ function viewCardsHandler (req, res) {
 }
 
 function noPageHandler (req, res) {
-  res.writeHead(404, {
-    'Content-Type': 'text/html'
-  });
-  res.end('<center><h1>404 Page Not found</h1></center>');
+  fs.readFile(__dirname + '/../public/404.html', function(err, ress) {
+
+       if (err) {
+           res.writeHead(500, { 'Content-Type': 'text/html' });
+           res.end('<h1>Internel Server Error</h1>');
+       } else {
+           res.writeHead(404, { 'Content-Type': 'text/html' });
+           res.end(ress);
+       }
+   });
 }
 
 const registerHandler = (req, res) => {
