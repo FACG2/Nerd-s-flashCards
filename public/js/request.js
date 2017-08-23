@@ -4,7 +4,7 @@ var request = function (method, url, data, callback) {// eslint-disable-line
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var response = JSON.parse(xhr.responseText);
+      var response = xhr.responseText;
       callback(response);
     }
   };
@@ -20,7 +20,7 @@ var get = function (url, cb) {// eslint-disable-line
   request('GET', url, null, cb);
 };
 
-var post = function (url, data, cb) {// eslint-disable-line 
-  request('POST', url, data, cb);
+var post = function (url, data, cb) {// eslint-disable-line
+  var sdata = JSON.stringify(data);
+  request('POST', url, sdata, cb);
 };
-

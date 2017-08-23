@@ -1,4 +1,3 @@
-
 const dbConnection = require('../database/db_connection.js');
 
 const { createHash } = require('crypto');
@@ -25,7 +24,7 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
       } else {
         const sql = {
           text: 'INSERT INTO users (name,usaname,password) VALUES ($1,$2,$3)',
-          values: [obj.name, obj.usaname, hashedPassword]
+          values: [obj.name, obj.username, hashedPassword]
         };
         dbConnection.query(sql, (err, res) => {
           if (err) {
@@ -40,6 +39,7 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
 };
 
 const login = (name, password, cb) => {
+  console.log(name, password);
   const hashedPassword = createHash('sha256').update(password).digest('hex');
 
   checkUser(name, (err, res) => {
@@ -56,9 +56,13 @@ const login = (name, password, cb) => {
         //   }
         // });
       } else { // /// not matched password
+        console.log('no matches');
         const passwordError = new Error('Not Matched Passwords');
         cb(passwordError);
       }
+    } else if (res.length === 0) {
+      const notFount = new Error('Not Found User');
+      cb(notFount);
     }
   });
 };
@@ -123,10 +127,16 @@ const getUsers = (cb) => {
   });
 };
 
+// const getUser = (userId, cb) => {
+//   dbConnection.query(`SELECT * FROM users WHERE id='${userId}'`, (err, res) => {
+//     if (err) {
+//       cb(err);
+//     } else {
+//       cb(null, res.rows);
 //     }
 //   });
 // };
-
+//
 // users , topics , cards ,card_likes
 
 const getTopics = (cb) => {

@@ -8,25 +8,25 @@
   <div class="container">
     <div class="signlogup">
 
-      <div class="signBar"> 
+      <div class="signBar">
         <span id="login">login</span>
         <span id="signUp">sign Up</span>
       </div>
       <div class="login">
         <form id="loginForm" action="/login" method="post">
-            <input class="usernameInput" type="text" value="" name="username" placeholder="username" required>
-            <input class="passwordInput" type="password" value="" name="password" placeholder="password" required>
+            <input class="usernameInput" id="username" type="text" value="" name="username" placeholder="username" required>
+            <input class="passwordInput" id="password" type="password" value="" name="password" placeholder="password" required>
             <button id="login" type="submit" name="">login</button>
          </form>
       </div>
       <div class="signUpForm">
         <form id="signUpForm" action="/register" method="post">
-            <input class="nameInputS" type="text" value="" name="nmae" placeholder="name" required>
-            <input class="usernameInputS" type="text" value="" name="usaname" placeholder="username" required>
-            <input class="passwordInputS" type="password" value="" name="password" placeholder="password" required>
+            <input class="nameInputS" id="nameInputS" type="text" value="" name="nmae" placeholder="name" required>
+            <input class="usernameInputS" id="usernameInputS" type="text" value="" name="usaname" placeholder="username" required>
+            <input class="passwordInputS" id="passwordInputS" type="password" value="" name="password" placeholder="password" required>
             <input class="passwordInputS" type="password" value="" name="confrimPassword" placeholder="Confrim password" required>
             <button id="signUp" type="submit" name="">Sign Up</button>
-         </form>        
+         </form>
       </div>
 
     </div>
