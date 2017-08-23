@@ -36,11 +36,11 @@ test('Testing the register function Query', (t) => {
   };
   functions.getUsers((err, res) => {
     if (err) {
-      console.log(err);
+      t.end(err);
     } else {
       functions.register(obj2, (error, response) => {
         if (error) {
-          console.log(error);
+          t.end(error);
         } else {
           functions.getUsers((error2, response2) => {
             if (error2) {

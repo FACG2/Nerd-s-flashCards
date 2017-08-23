@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/FACG2/Nerd-s-flashCards#readme",
   "dependencies": {
+    "cookie": "^0.3.1",
     "path": "^0.12.7",
     "semistandard": "^11.0.0"
   }

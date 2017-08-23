@@ -27,7 +27,6 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
     if (err) {
       console.log('first error');
     } else {
-      // console.log(res);
       if (res.length !== 0) { // /// can't add the existing user
         const userError = new Error('User is exist');
         cb(userError);

@@ -4,7 +4,7 @@ function router (req, res) {
   var url = req.url;
   if (url === '/' || url.startsWith('/public')) {
     handler.publicHandler(req, res, (req, response) => {
-      handler.viewTopicsHandler(req, res);
+      handler.viewTopicsHandler(req, response);
     });
   } else if (url === '/login') {  // //// login method should be POST
     handler.loginHandler(req, res);
