@@ -107,6 +107,7 @@ test('Add New Card: addCard', (t) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(res.rows);
       t.deepEqual(res.command, 'INSERT', 'should run query type INSERT');
 
       selectLastAdded('cards', (err, res) => {
