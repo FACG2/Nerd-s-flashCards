@@ -1,3 +1,4 @@
+
 var request = function (method, url, data, callback) {// eslint-disable-line
   var xhr = new window.XMLHttpRequest();// eslint-disable-line
 
@@ -22,3 +23,4 @@ var get = function (url, cb) {// eslint-disable-line
 var post = function (url, data, cb) {// eslint-disable-line 
   request('POST', url, data, cb);
 };
+
