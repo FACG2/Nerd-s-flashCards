@@ -26,7 +26,7 @@ function viewTopicsHandler (req, res) {
     }
   });
 }
-function publicHandler (req, res, cb) {
+function publicHandler (req, res) {
   var url = req.url;
   if (url === '/') {
     url = '/public/index.html';
@@ -43,15 +43,10 @@ function publicHandler (req, res, cb) {
       res.writeHead(200, {
         'Content-Type': contentTypes[fileExtention]
       });
-      viewTopicsHandler(err, res);
-
-      cb(req, res);
+      res.end(data);
     }
   });
-
-      // res.end(data);
 }
-  // });};
 
 function viewCardsHandler (req, res) {
   dbFunctions.getCards((err, ress) => {
@@ -114,7 +109,8 @@ const loginHandler = (req, res) => {
         } else {
           // ///////////// set the cookie with the object id, redirect to the home and call view user topics
           var user = {
-            userId: res[0].id
+            userId: res[0].id,
+            username: res[0].name
           };
           var userToken = jwt.sign(user, secret);
           res.writeHead(302, {'Location': '/', 'Set-Cookie': `token=${userToken}`});
@@ -132,22 +128,100 @@ const logOutHandler = (req, res) => { // eslint-disable-line // // redirect to t
   res.writeHead(302, {'Location': '/', 'Set-Cookie': 'token=""; max-Age=0' }); // eslint-disable-line
   return res.end();// eslint-disable-line
 };// eslint-disable-line
-
+// ///////// in the DOM file
 const getUserTopics = (req, res) => {
   // //////////
   if (req.headers.cookie === undefined) {
     res.writeHead(401, {'Content-Type': 'text/html' });// eslint-disable-line
   } else {
-    var cookies = jwt.verify(cookie.parse(req.headers.cookie), secret);
-    if (cookies) {
-      getUserTopics(req.id, (err, res) => {
+    var cookies = cookie.parse(req.headers.cookie);
+    if (cookies.token) {
+      var tokenState = jwt.verify(cookies.token, secret);
+      if (tokenState) {
+        getUserTopics(req.id, (err, res) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(res);
+          }
+        });
+      } else {
+        res.writeHead( 401, {'Content-Type': 'text/html' }); // eslint-disable-line
+        res.end('NOT AUTHORISED ');
+      }
+    }
+  }
+};
+
+const addTopicHandler = (req, res) => {
+  let addTopicData = '';
+  req.on('data', function (dataChunks) {
+    addTopicData += dataChunks;
+  });
+  if (addTopicData) {
+    req.on('end', () => {
+      var parsedData = JSON.parse(addTopicData);
+      dbFunctions.addTopic(parsedData.title, parsedData.status, parsedData.user_id, (err, res) => {
         if (err) {
-          console.log(err);
+          res.writeHead(404, {'content-type': 'text/plain'});
+          res.end('Page Not Found');
         } else {
-          console.log(res);
+          res.writeHead(302, {'Location': '/addCard'});
+          res.end('Added successfully');
         }
       });
-    }
+    });
+  } else {
+    res.writeHead(404, {'content-type': 'text/plain'});
+    res.end('Page Not Found');
+  }
+};
+
+const addCardHandler = (req, res) => {
+  let addCardData = '';
+  req.on('data', function (dataChunks) {
+    addCardData += dataChunks;
+  });
+  if (addCardData) {
+    req.on('end', () => {
+      var parsedData = JSON.parse(addCardData);
+      dbFunctions.addTopic(parsedData.content, parsedData.likes, parsedData.topics_id, (err, res) => {
+        if (err) {
+          res.writeHead(404, {'content-type': 'text/plain'});
+          res.end('Page Not Found');
+        } else {
+          res.writeHead(302, {'Location': '/'});
+          res.end('Added successfully');
+        }
+      });
+    });
+  } else {
+    res.writeHead(404, {'content-type': 'text/plain'});
+    res.end('Page Not Found');
+  }
+};
+
+const UpdateCardHandler = (req, res) => {
+  let updateCardData = '';
+  req.on('data', function (dataChunks) {
+    updateCardData += dataChunks;
+  });
+  if (updateCardData) {
+    req.on('end', () => {
+      var parsedData = JSON.parse(updateCardData);
+      dbFunctions.updateCardData(parsedData, (err, res) => {
+        if (err) {
+          res.writeHead(404, {'content-type': 'text/plain'});
+          res.end('Page Not Found');
+        } else {
+          res.writeHead(302, {'Location': '/'});
+          res.end('Added successfully');
+        }
+      });
+    });
+  } else {
+    res.writeHead(404, {'content-type': 'text/plain'});
+    res.end('Page Not Found');
   }
 };
 
@@ -159,5 +233,8 @@ module.exports = {
   loginHandler,
   logOutHandler,
   getUserTopics,
-  registerHandler
+  registerHandler,
+  addTopicHandler,
+  addCardHandler,
+  UpdateCardHandler
 };
