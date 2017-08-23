@@ -1,0 +1,59 @@
+body{
+  background-color: #eaebed;
+    font-family: sans-serif;
+
+}
+
+.container{
+  margin:0 auto;
+  width: 73%;
+}
+
+/*start signlogup*/
+
+.signlogup{
+  text-align: center;
+  background-color: #d6d6d6;
+  font-size: 0;
+  margin-top: 70px;
+  padding:20px 0;
+  width: 300px;
+  margin: 150px auto 0 auto;
+}
+.signlogup input, .signlogup button{
+  margin: 7px auto;
+  display: block;
+}
+
+
+.signlogup button{
+   padding: 2.5px 13px;
+}
+.signlogup input{
+  height: 23px;
+  width: 241px;
+  text-align: center;
+}
+.signlogup span{
+  padding: 10px 36px;
+  background-color: #000;
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+}
+
+.signlogup form{
+  display: none;
+}
+
+.signlogup span:hover{
+  background-color: #424242
+}
+
+.signBar{
+  margin: 20px 0;
+}
+/*end signlogup*/
+
+
+
