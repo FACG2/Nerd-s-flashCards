@@ -1,21 +1,12 @@
 const dbConnection = require('../database/db_connection.js');
+
 const { createHash } = require('crypto');
-// let obj = {
-//   name: '',
-//   usaname: '',
-//   password: ''
-// };
 
 const checkUser = (name, cb) => {
   dbConnection.query(`SELECT * FROM users WHERE usaname='${name}'`, (err, res) => {
     if (err) {
       cb(err);
     } else {
-      // if (res.rows.length == 0) {
-      //   cb(null, false);
-      // } else {
-      //   cb(null, true);
-      // }
       cb(null, res.rows);
     }
   });
@@ -47,16 +38,6 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
   });
 };
 
-const getUsers = (cb) => {
-  dbConnection.query('SELECT * FROM users', (err, res) => {
-    if (err) {
-      cb(err);
-    } else {
-      cb(null, res.rows.length);
-    }
-  });
-};
-
 const login = (name, password, cb) => {
   const hashedPassword = createHash('sha256').update(password).digest('hex');
 
@@ -81,7 +62,45 @@ const login = (name, password, cb) => {
   });
 };
 
-// users , topics , cards ,card_likes
+const addTopic = (obj, cb) => {
+  dbConnection.query(`INSERT INTO topics (title ,status,user_id) VALUES ('${obj.title}', ${obj.status}, '${obj.user_id}')`, (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res);
+    }
+  });
+};
+
+const addCard = (obj, cb) => {
+  dbConnection.query(`INSERT INTO cards (content ,likes,topics_id) VALUES ('${obj.content}', ${obj.likes}, '${obj.topics_id}')`, (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res);
+    }
+  });
+};
+
+const deleteCard = (obj, cb) => {
+  dbConnection.query(`DELETE FROM cards WHERE id= '${obj.id}' `, (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res);
+    }
+  });
+};
+
+const UpdateCard = (obj, cb) => {
+  dbConnection.query(`UPDATE  cards SET content = '${obj.content}' WHERE id= '${obj.id}' `, (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res);
+    }
+  });
+};
 
 const getUserTopics = (id, cb) => {
   dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id  where topics.user_id ='${id}'`, (err, res) => {
@@ -92,6 +111,22 @@ const getUserTopics = (id, cb) => {
     }
   });
 };
+
+const getUsers = (cb) => {
+  dbConnection.query('SELECT * FROM users', (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res.rows.length);
+    }
+  });
+};
+
+//     }
+//   });
+// };
+
+// users , topics , cards ,card_likes
 
 const getTopics = (cb) => {
   dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id where topics.status = true`, (err, res) => {
@@ -118,6 +153,10 @@ module.exports = {
   login,
   checkUser,
   getUsers,
+  addTopic,
+  addCard,
+  deleteCard,
+  UpdateCard,
   getUserTopics,
   getTopics,
   getCards
