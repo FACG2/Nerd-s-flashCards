@@ -81,7 +81,7 @@ const registerHandler = (req, res) => {
   });
   if (data) {
     req.on('end', () => {
-      parsedData = JSON.parse(data);
+      var parsedData = JSON.parse(data);
       dbFunctions.register(parsedData, (err, res) => {
         if (err) {
           res.writeHead(404, {'content-type': 'text/plain'});
@@ -97,9 +97,7 @@ const registerHandler = (req, res) => {
     res.end('Page Not Found');
   }
 };
-// ////////////////////////////////////////////////////////
-// //// loginHandler + edit wadia query + router + database
-// ////////////////////////////////////////////////////////
+
 const loginHandler = (req, res) => {
   let loginData = '';
   req.on('data', function (dataChunks) {
@@ -107,8 +105,8 @@ const loginHandler = (req, res) => {
   });
   if (loginData) {
     req.on('end', () => {
-      parsedData = JSON.parse(loginData);
-      dbFunctions.login(loginData.name, loginData.password, (err, res) => { // // will return the object
+      var parsedData = JSON.parse(loginData);
+      dbFunctions.login(parsedData.name, parsedData.password, (err, res) => { // // will return the object
         if (err) {
           res.writeHead(404, {'content-type': 'text/plain'});
           res.end('Page Not Found');
@@ -126,10 +124,10 @@ const loginHandler = (req, res) => {
   }
 };
 
-const logOutHandler = (req, res) => { // // redirect to the home with get public cards only and delete the token
-  res.writeHead(302, {'Location': '/', 'Set-Cookie': 'token=""; max-Age=0' });
-  return res.end();
-};
+const logOutHandler = (req, res) => { // eslint-disable-line // // redirect to the home with get public cards only and delete the token
+  res.writeHead(302, {'Location': '/', 'Set-Cookie': 'token=""; max-Age=0' }); // eslint-disable-line
+  return res.end();// eslint-disable-line
+};// eslint-disable-line
 
 const getUserTopics = (req, res) => {
     // ///// if the user is authenticated (token is exist) then view the user topics else go to the public home
@@ -141,7 +139,7 @@ module.exports = {
   viewCardsHandler,
   noPageHandler,
   loginHandler,
-  logoutHandler,
+  logOutHandler,
   getUserTopics,
   registerHandler
 };

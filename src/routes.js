@@ -12,11 +12,9 @@ function router (req, res) {
     handler.logOutHandler(req, res);
   } else if (url === '/register') {
     handler.registerHandler(req, res);
-  }
-  else if (url === '/getUserTopics'){
-    handler.getUserTopics(req,res);
-  }
-  else if (url === '/addTopic') {
+  } else if (url === '/getUserTopics') {
+    handler.getUserTopics(req, res);
+  } else if (url === '/addTopic') {
 
   } else if (url === '/addCard') {
 
