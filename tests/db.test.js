@@ -1,9 +1,8 @@
-const func = require('../src/queries/db_functions.js');
-
 const test = require('tape');
-
+const functions = require('../src/queries/db_functions.js');
+// //////// checkUser test
 test('Testing the checkuser function Query', (t) => {
-  func.checkUser('qqq', (err, data) => {
+  functions.checkUser('qqq', (err, data) => {
     if (err) {
       t.notOk(err);
     } else {
@@ -14,32 +13,36 @@ test('Testing the checkuser function Query', (t) => {
   });
 });
 
+ // ////// LOG-IN test
+
 test('Testing the login function Query', (t) => {
-  func.login('aaa', 'aaa', (err, data) => {
+  functions.login('aaa', 'aaa', (err, data) => {
     if (err) {
       t.notOk(err);
     } else {
+      console.log(data);
       t.equal(data[0].usaname, 'aaa', 'should return the user if the user name and password matched with any existing user');
       t.end();
     }
   });
 });
 
+    // //////// Register test
 test('Testing the register function Query', (t) => {
   var obj2 = {
     name: 'uiii',
     usaname: 'uiii',
     password: '116'
   };
-  func.getUsers((err, res) => {
+  functions.getUsers((err, res) => {
     if (err) {
       console.log(err);
     } else {
-      func.register(obj2, (error, response) => {
+      functions.register(obj2, (error, response) => {
         if (error) {
           console.log(error);
         } else {
-          func.getUsers((error2, response2) => {
+          functions.getUsers((error2, response2) => {
             if (error2) {
               console.log(error2);
             } else {
@@ -49,6 +52,59 @@ test('Testing the register function Query', (t) => {
           });
         }
       });
+    }
+  });
+});
+
+// //////// Get Topic test
+
+test('get topcis', (t) => {
+  functions.getTopics((err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      var actual = res[0];
+      var expected = {
+        title: 'Qamer',
+        name: 'Qamer'
+      };
+      t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
+      t.end();
+    }
+  });
+});
+
+// //// Get Users Topics test
+test('get user topcis', (t) => {
+  functions.getUserTopics(1, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      var actual = res[0];
+      var expected = {
+        title: 'Qamer',
+        name: 'Qamer'
+      };
+      t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
+      t.end();
+    }
+  });
+});
+
+// //// get cards test
+test('get a cards', (t) => {
+  functions.getCards((err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      var actual = res[0];
+
+      var expected = {
+        content: 'MahmmoudMahmmoud',
+        likes: 5
+      };
+      t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
+      t.end();
     }
   });
 });

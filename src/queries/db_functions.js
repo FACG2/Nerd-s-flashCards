@@ -1,5 +1,4 @@
-const connection = require('../database/db_connection.js');
-
+const dbConnection = require('../database/db_connection.js');
 const { createHash } = require('crypto');
 // let obj = {
 //   name: '',
@@ -7,10 +6,9 @@ const { createHash } = require('crypto');
 //   password: ''
 // };
 
-// const getUser(name)
 
 const checkUser = (name, cb) => {
-  connection.query(`SELECT * FROM users WHERE usaname='${name}'`, (err, res) => {
+   dbConnection.query(`SELECT * FROM users WHERE usaname='${name}'`, (err, res) => {
     if (err) {
       cb(err);
     } else {
@@ -39,7 +37,7 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
           text: 'INSERT INTO users (name,usaname,password) VALUES ($1,$2,$3)',
           values: [obj.name, obj.usaname, hashedPassword]
         };
-        connection.query(sql, (err, res) => {
+         dbConnection.query(sql, (err, res) => {
           if (err) {
             cb(err);
           } else {
@@ -52,7 +50,7 @@ const register = (obj, cb) => { // /// add user to users table (if NOT EXIST)
 };
 
 const getUsers = (cb) => {
-  connection.query('SELECT * FROM users', (err, res) => {
+   dbConnection.query('SELECT * FROM users', (err, res) => {
     if (err) {
       cb(err);
     } else {
@@ -85,9 +83,44 @@ const login = (name, password, cb) => {
   });
 };
 
-module.exports = {
-  register,
-  login,
-  checkUser,
-  getUsers
-};
+// users , topics , cards ,card_likes
+
+  const getUserTopics = (id, cb) => {
+    dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id  where topics.user_id ='${id}'`, (err, res) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, res.rows);
+      }
+    });
+  };
+
+  const getTopics = (cb) => {
+    dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id where topics.status = true`, (err, res) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, res.rows);
+      }
+    });
+  };
+
+  const getCards = (cb) => {
+    dbConnection.query(`SELECT cards.content, cards.likes from cards inner join topics on cards.topics_id = topics.id inner join topic_likes on cards.likes = topic_likes.likes`, (err, res) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, res.rows);
+      }
+    });
+  };
+
+  module.exports = {
+    register,
+    login,
+    checkUser,
+    getUsers,
+    getUserTopics,
+    getTopics,
+    getCards
+  };
