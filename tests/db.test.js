@@ -1,10 +1,65 @@
 const test = require('tape');
-
+const functions = require('../src/queries/db_functions.js');
 const {
   selectLastAdded,
   selectById
 } = require('./helpers/db.js');
-const functions = require('../src/queries/db_functions.js');
+
+// //////// checkUser test ///// qamar
+test('Testing the checkuser function Query', (t) => {
+  functions.checkUser('qqq', (err, data) => {
+    if (err) {
+      t.notOk(err);
+    } else {
+      t.equal(data[0].usaname, 'qqq', 'should the user if the user exists');
+      t.end();
+    }
+  });
+});
+
+ // ////// LOG-IN test //// qamar
+
+test('Testing the login function Query', (t) => {
+  functions.login('aaa', 'aaa', (err, data) => {
+    if (err) {
+      t.notOk(err);
+    } else {
+      t.equal(data[0].usaname, 'aaa', 'should return the user if the user name and password matched with any existing user');
+      t.end();
+    }
+  });
+});
+
+    // //////// Register test  //// qamar
+test('Testing the register function Query', (t) => {
+  var obj2 = {
+    name: 'uiii',
+    usaname: 'uiii',
+    password: '116'
+  };
+  functions.getUsers((err, res) => {
+    if (err) {
+      t.end(err);
+    } else {
+      functions.register(obj2, (error, response) => {
+        if (error) {
+          t.end(error);
+        } else {
+          functions.getUsers((error2, response2) => {
+            if (error2) {
+              console.log(error2);
+            } else {
+              t.notEqual(res, response2, 'The length of the table should not be the same');
+              t.end();
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
+// //// ADD TOPIC TEST
 test('Add New Topic', (t) => {
   var obj = {
     title: 'Ghadeer',
@@ -17,9 +72,12 @@ test('Add New Topic', (t) => {
       console.log(err);
     } else {
       t.deepEqual(res.command, 'INSERT', 'should return the inerted object');
+      t.end();
+    }
+  });
+});
 
-const functions = require('../src/queries/db_functions.js');
-
+// //// GET TOPICS TEST
 
 test('get topcis', (t) => {
   functions.getTopics((err, res) => {
@@ -32,12 +90,12 @@ test('get topcis', (t) => {
         name: 'Qamer'
       };
       t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
-
       t.end();
     }
   });
 });
 
+// //// ADD NEW CARD TEST
 test('Add New Card: addCard', (t) => {
   var obj = {
     content: 'GHDEERGHDEERGHDR',
@@ -60,7 +118,11 @@ test('Add New Card: addCard', (t) => {
         t.equal(res[0].topics_id, obj.topics_id, 'should insert correct topics_id to \'cards\' table');
         t.end();
       });
+    }
+  });
+});
 
+// //// GET USER TOPICS TEST
 
 test('get user topcis', (t) => {
   functions.getUserTopics(1, (err, res) => {
@@ -74,11 +136,11 @@ test('get user topcis', (t) => {
       };
       t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
       t.end();
-
     }
   });
 });
 
+// //// DELETE CARD TEST
 
 test('Delete exists card', (t) => {
   // first we create a card
@@ -115,6 +177,7 @@ test('Delete exists card', (t) => {
   });
 });
 
+// /// UPDATE EXISTED CARD
 test(' Update exists card ', (t) => {
   // first we create a card
   var obj = {
@@ -147,21 +210,6 @@ test(' Update exists card ', (t) => {
           }
         });
       });
-
-test('get a cards', (t) => {
-  functions.getCards((err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      var actual = res[0];
-
-      var expected = {
-        content: 'MahmmoudMahmmoud',
-        likes: 5
-      };
-      t.deepEqual(actual, expected, 'should return an object with MahmmoudMahmmoud');
-      t.end();
-
     }
   });
 });
