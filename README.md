@@ -19,23 +19,52 @@ Schema for Database
 
 Table users
 
-| id  | name     | usaname  | password |  
-| --- | ---------| ------   | --------    |
+
+| id  | name | usaname | password |
+| --- | ------------ | ------ | -------- |
+| 1   | Qamer | Qamer93 | 123456 |
+| 2   | Mahmmoud | Mahmmoud96 | 123456 |
+| 3   | Ghadeer | Ghadeer93 | 123456|
+
+
 
 Table topics
 
-| id  | title     | status  | user_id |  
-| --- | ---------| ------   | --------    |
+
+| id  | title | status | user_id |
+| --- | ------------ | ------ | -------- |
+| 1   | Qamer | true | 1 |
+| 2   | Mahmmoud | false | 2 |
+| 3   | Ghadeer | false | 3|
+
+
 
 Table cards
 
-| id  | content     | likes  | topics_id |  
-| --- | ---------| ------   | --------    |
+| id  | content | likes | topics_id |
+| --- | ------------ | ------ | -------- |
+| 1   | qqqqqqqqqqqqqqqq | 9 | 1 |
+| 2   | MahmmoudMahmmoud | 5 | 2 |
+| 2   | GHDEERGHDEERGHDR | 7 |3 |
+
+
+
+
 
 Table topic_likes
 
-| id  | likes     | user_id  | topics_id |  
-| --- | ---------| ------   | --------    |
+
+
+| id  | likes | user_id | topics_id |
+| --- | ------------ | ------ | -------- |
+| 1   | 9 | 1 | 1 |
+| 2   | 5 | 2 | 2 |
+| 3   | 5 | 3 | 3|
+
+
+
+
+
 
 
 For test visit this link :point_right: :point_right:
