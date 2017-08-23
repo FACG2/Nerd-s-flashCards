@@ -23,4 +23,3 @@ var get = function (url, cb) {// eslint-disable-line
 var post = function (url, data, cb) {// eslint-disable-line 
   request('POST', url, data, cb);
 };
-
