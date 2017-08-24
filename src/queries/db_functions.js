@@ -108,7 +108,7 @@ const UpdateCard = (obj, cb) => {
 };
 
 const getUserTopics = (id, cb) => {
-  dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id  where topics.user_id ='${id}'`, (err, res) => {
+  dbConnection.query(`SELECT topics.title ,users.name from topics inner join users on topics.user_id = users.id  where topics.status = true or topics.user_id ='${id}'`, (err, res) => {
     if (err) {
       cb(err);
     } else {

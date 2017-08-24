@@ -3,9 +3,13 @@
 <head>
   <title>Nerd's flashCards</title>
   <link rel="stylesheet" href="public/css/style.css" class="css">
+  <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
+   <script src='/public/js/jwt_decode.js'></script>
+  <script type="text/javascript" src="public/js/public_page.js"></script>
 </head>
 <body>
   <div class="container">
+    <h1>Nerd's flashCards</h1>
     <div class="signlogup">
 
       <div class="signBar">
@@ -14,24 +18,30 @@
       </div>
       <div class="login">
         <form id="loginForm" action="/login" method="post">
-            <input class="usernameInput" id="username" type="text" value="" name="username" placeholder="username" required>
-            <input class="passwordInput" id="password" type="password" value="" name="password" placeholder="password" required>
-            <button id="login" type="submit" name="">login</button>
-         </form>
+          <input class="usernameInput" id="username" type="text" value="" name="username" placeholder="username" onchange="usernameCheck" required>
+          <input class="passwordInput" id="password" type="password" value="" name="pass" placeholder="password" onchange="passwordCheck" required>
+          <button id="login" type="submit" name="">login</button>
+        </form>
       </div>
       <div class="signUpForm">
-        <form id="signUpForm" action="/register" method="post">
-            <input class="nameInputS" id="nameInputS" type="text" value="" name="nmae" placeholder="name" required>
-            <input class="usernameInputS" id="usernameInputS" type="text" value="" name="usaname" placeholder="username" required>
-            <input class="passwordInputS" id="passwordInputS" type="password" value="" name="password" placeholder="password" required>
-            <input class="passwordInputS" type="password" value="" name="confrimPassword" placeholder="Confrim password" required>
+          <form id="signUpForm" action="/register" method="post">
+            <input class="nameInputS" id="nameInputS" type="text" value="" name="newusername" placeholder="name" required>
+            <input class="usernameInputS" id="usernameInputS" type="text" value="" name="nickname" placeholder="username" onchange="nicknamesignUpCheck" required>
+            <input class="passwordInputS" id="passwordInputS" type="password" value="" name="password" placeholder="password" onchange="passwordCheck" required>
+            <span id="strength">Type Password</span>
+            <input class="passwordInputS" type="password" value="" name="confrimPassword" placeholder="Confrim password" onchange="confirmPasswordCheck" required>
+            <span id="messege">Type Password</span>
             <button id="signUp" type="submit" name="">Sign Up</button>
-         </form>
+        </form>
       </div>
+    </div>
 
+    <div class="divTopics">
+      
     </div>
   </div>
   <script src="public/js/request.js"></script>
+  <script src="public/js/validation.js"></script>
   <script src="public/js/index.js"></script>
 </body>
 </html>

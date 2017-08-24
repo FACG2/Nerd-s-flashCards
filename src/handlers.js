@@ -151,44 +151,73 @@ const loginHandler = (req, res) => {
   // }
 // };
 
-const logOutHandler = (req, res) => { // eslint-disable-line // // redirect to the home with get public cards only and delete the token
-  res.writeHead(200, {'Set-Cookie': 'token=""; max-Age=0' }); // eslint-disable-line
-  res.end('red(/)');// eslint-disable-line
+const logOutHandler = (req, res) => { // // redirect to the home with get public cards only and delete the token
+  res.writeHead(200, {'Set-Cookie': 'token=""; max-Age=0' }); 
+  res.end('red(/)');
 };// eslint-disable-line
 // ///////// in the DOM file
-const getUserTopics = (req, res) => {
-  // //////////
-  if (req.headers.cookie === undefined) {
-    res.writeHead(401, {'Content-Type': 'text/html' });// eslint-disable-line
-  } else {
-    var cookies = cookie.parse(req.headers.cookie);
-    if (cookies.token) {
-      var tokenState = jwt.verify(cookies.token, secret);
-      if (tokenState) {
-        getUserTopics(req.id, (err, res) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(res);
-          }
-        });
-      } else {
-        res.writeHead( 401, {'Content-Type': 'text/html' }); // eslint-disable-line
-        res.end('NOT AUTHORISED ');
-      }
-    }
-  }
-};
+
+// const getUserTopics = (req, res) => {
+//   // //////////
+//   console.log(req)
+//     if (req.headers.cookie === undefined) {
+//     res.writeHead(401, {'Content-Type': 'text/html' });// eslint-disable-line
+//   } else {
+//     var cookies = cookie.parse(req.headers.cookie);
+//     if (cookies.token) {
+//       var tokenState = jwt.verify(cookies.token, secret);
+//       if (tokenState) {
+//         getUserTopics(req.id, (err, res) => {
+//           if (err) {
+//             console.log(err);
+//           } else {
+//             console.log(res);
+//           }
+//         });
+//       } else {
+//         res.writeHead( 401, {'Content-Type': 'text/html' }); // eslint-disable-line
+//         res.end('NOT AUTHORISED ');
+//       }
+//     }
+//   }
+// };
+
+
+
+
+// const getUserTopics = (req, res) => {
+//   // //////////    
+//        var url = req.url;
+//        var id = url.split('?')[1].split('=')[1].split('&')[0]
+//        console.log(Number(id))
+      
+//         dbFunctions.getUserTopics(parseInt(id), (err, ress) => {
+//           if (err) {
+//            res.writeHead(500, {
+//               'Content-Type': 'text/html'
+//             });
+//             res.end('server error');
+//           } else {
+//             res.end(JSON.stringify(ress));
+//              console.log(ress);
+ 
+//           }
+//         });
+    
+// };
+
 
 const addTopicHandler = (req, res) => {
   let addTopicData = '';
-  req.on('data', function (dataChunks) {
+  req.on('data', function(dataChunks) {
     addTopicData += dataChunks;
   });
+  console.log(addTopicData)
   if (addTopicData) {
     req.on('end', () => {
       var parsedData = JSON.parse(addTopicData);
       dbFunctions.addTopic(parsedData.title, parsedData.status, parsedData.user_id, (err, res) => {
+        console.log(err)
         if (err) {
           res.writeHead(404, {'content-type': 'text/plain'});
           res.end('Page Not Found');
@@ -206,9 +235,12 @@ const addTopicHandler = (req, res) => {
 
 const addCardHandler = (req, res) => {
   let addCardData = '';
+
   req.on('data', function (dataChunks) {
     addCardData += dataChunks;
+
   });
+  console.log(addCardData)
   if (addCardData) {
     req.on('end', () => {
       var parsedData = JSON.parse(addCardData);
@@ -259,7 +291,7 @@ module.exports = {
   noPageHandler,
   loginHandler,
   logOutHandler,
-  getUserTopics,
+  // getUserTopics,
   registerHandler,
   addTopicHandler,
   addCardHandler,

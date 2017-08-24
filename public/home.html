@@ -2,12 +2,32 @@
 <html>
 <head>
   <title>Home</title>
+  <link rel="stylesheet" href="public/css/homeStyle.css" class="css">
+  <script src='/public/js/jwt_decode.js'></script>
+  <script type="text/javascript" src="public/js/protected_page.js"></script>
 </head>
 <body>
-<h1>HOME</h1>
-<p id="logout">Log Out</p>
-<script src='/public/js/jwt_decode.js'></script>
+<div class="NavBar">
+    <div>Welcome back <span id="usernamehome"></span></div>
+    <button id="logout">Log out</button>
+  </div>
+<div class="container">
+  <div class="createtopic">
+        <form id="loginForm" action="/addTopic" method="post">
+          <input class="topicTitle" type="text" value="" name="username" placeholder="username" required>
+          <div class="checkPrivcy">
+            <input type="checkbox" id="privciy" name="status" value="privte?">
+            <label for="subscribeNews">you want it privte?</label>
+          </div>
+          <button id="addTopic" type="submit" name="">Add topic</button>
+        </form>
+      </div>
+
+    <div class="divTopics">
+      
+    </div>
+</div>
+<script src="public/js/request.js"></script>
 <script src='/public/js/home.js'></script>
-</script>
 </body>
 </html>
