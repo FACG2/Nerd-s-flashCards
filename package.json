@@ -37,6 +37,7 @@
     "cookie": "^0.3.1",
     "jsonwebtoken": "^7.4.3",
     "path": "^0.12.7",
+    "querystring": "^0.2.0",
     "semistandard": "^11.0.0"
   }
 }
