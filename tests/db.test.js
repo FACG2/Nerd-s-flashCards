@@ -6,16 +6,16 @@ const {
 } = require('./helpers/db.js');
 
 // //////// checkUser test ///// qamar
-test('Testing the checkuser function Query', (t) => {
-  functions.checkUser('qqq', (err, data) => {
-    if (err) {
-      t.notOk(err);
-    } else {
-      t.equal(data[0].usaname, 'qqq', 'should the user if the user exists');
-      t.end();
-    }
-  });
-});
+// test('Testing the checkuser function Query', (t) => {
+//   functions.checkUser('qqq', (err, data) => {
+//     if (err) {
+//       t.notOk(err);
+//     } else {
+//       t.equal(data[0].usaname, 'qqq', 'should the user if the user exists');
+//       t.end();
+//     }
+//   });
+// });
 
  // ////// LOG-IN test //// qamar
 

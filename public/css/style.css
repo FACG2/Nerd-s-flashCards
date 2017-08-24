@@ -9,6 +9,15 @@ body{
   width: 73%;
 }
 
+
+h1{
+  font-family: 'Sedgwick Ave Display', cursive;
+  text-align: center;
+      font-size: 38px;
+    color: #2b2b2b;
+}
+
+
 /*start signlogup*/
 
 .signlogup{
@@ -18,18 +27,24 @@ body{
   margin-top: 70px;
   padding:20px 0;
   width: 300px;
-  margin: 150px auto 0 auto;
+  margin: 25px auto 0 auto;
   border-radius: 2px
 }
 .signlogup input, .signlogup button{
   margin: 7px auto;
   display: block;
+
 }
 
 
 .signlogup button{
-   padding: 2.5px 13px;
+  padding: 5.5px 15px;
+  background-color: #2b2b2b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
+
 .signlogup input{
   height: 23px;
   width: 241px;
@@ -48,13 +63,45 @@ body{
 }
 
 .signlogup span:hover{
-  background-color: #424242
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 .signBar{
   margin: 20px 0;
 }
+
+.signUpForm span {
+      padding: 4px;
+    font-size: 12px;
+    color: #d6d6d6;
+}
 /*end signlogup*/
 
+/*Start divTopics*/
+.divTopics{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.flashCard{
+    background-color: #d6d6d6;
+    width: 24%;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 2px
+}
+.flashCard:hover{
+  opacity: 0.8
+}
+
+.title{
+  margin: 1px 0;
+}
+
+.owner{
+  font-size: 9px;
+}
 
 
+/*end divTopics/*

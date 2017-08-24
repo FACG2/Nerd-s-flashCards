@@ -1,10 +1,10 @@
 
-var request = function (method, url, data, callback) {// eslint-disable-line
-  var xhr = new window.XMLHttpRequest();// eslint-disable-line
+var request = function (method, url, data, callback) {
+  var xhr = new window.XMLHttpRequest();
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var response = JSON.parse(xhr.responseText);
+      var response = xhr.responseText;
       callback(response);
     }
   };
@@ -16,10 +16,11 @@ var request = function (method, url, data, callback) {// eslint-disable-line
   }
 };
 
-var get = function (url, cb) {// eslint-disable-line
+var get = function (url, cb) {
   request('GET', url, null, cb);
 };
 
-var post = function (url, data, cb) {// eslint-disable-line 
-  request('POST', url, data, cb);
+var post = function (url, data, cb) {
+  var sdata = JSON.stringify(data);
+  request('POST', url, sdata, cb);
 };
