@@ -20,10 +20,8 @@ function viewTopicsHandler (req, res) {
         'Content-Type': 'text/html'
       });
       res.end('server error');
-      console.log(err);
     } else {
       res.end(JSON.stringify(ress));
-      console.log(ress);
     }
   });
 }
@@ -103,7 +101,6 @@ const registerHandler = (req, res) => {
     var parsedData = JSON.parse(data);
     dbFunctions.register(parsedData, (err, dbres) => {
       if (err) {
-        console.log('first not found');
         res.writeHead(404, {'content-type': 'text/plain'});
         res.end('Page Not Found');
       } else {
@@ -152,10 +149,9 @@ const loginHandler = (req, res) => {
 // };
 
 const logOutHandler = (req, res) => { // // redirect to the home with get public cards only and delete the token
-  res.writeHead(200, {'Set-Cookie': 'token=""; max-Age=0' }); 
+  res.writeHead(200, {'Set-Cookie': 'token=""; max-Age=0' });
   res.end('red(/)');
-};// eslint-disable-line
-// ///////// in the DOM file
+};
 
 // const getUserTopics = (req, res) => {
 //   // //////////
@@ -183,41 +179,17 @@ const logOutHandler = (req, res) => { // // redirect to the home with get public
 // };
 
 
-
-
-// const getUserTopics = (req, res) => {
-//   // //////////    
-//        var url = req.url;
-//        var id = url.split('?')[1].split('=')[1].split('&')[0]
-//        console.log(Number(id))
-      
-//         dbFunctions.getUserTopics(parseInt(id), (err, ress) => {
-//           if (err) {
-//            res.writeHead(500, {
-//               'Content-Type': 'text/html'
-//             });
-//             res.end('server error');
-//           } else {
-//             res.end(JSON.stringify(ress));
-//              console.log(ress);
- 
-//           }
-//         });
-    
-// };
-
-
 const addTopicHandler = (req, res) => {
   let addTopicData = '';
-  req.on('data', function(dataChunks) {
+  req.on('data', function (dataChunks) {
     addTopicData += dataChunks;
   });
-  console.log(addTopicData)
+  console.log(addTopicData);
   if (addTopicData) {
     req.on('end', () => {
       var parsedData = JSON.parse(addTopicData);
       dbFunctions.addTopic(parsedData.title, parsedData.status, parsedData.user_id, (err, res) => {
-        console.log(err)
+        console.log(err);
         if (err) {
           res.writeHead(404, {'content-type': 'text/plain'});
           res.end('Page Not Found');
@@ -238,9 +210,7 @@ const addCardHandler = (req, res) => {
 
   req.on('data', function (dataChunks) {
     addCardData += dataChunks;
-
   });
-  console.log(addCardData)
   if (addCardData) {
     req.on('end', () => {
       var parsedData = JSON.parse(addCardData);

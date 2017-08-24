@@ -33,8 +33,6 @@ function usernameCheck () {
   if (usernamevalidate.test(username.value)) {
     return true
   } else {
-    //alert('Your Name must contanin capital and Small latters ')
-
     return false
   }
 }
@@ -44,8 +42,6 @@ function nicknamesignUpCheck () {
   if (namesignUpvalidate.test(nickname.value)) {
     return true
   } else {
-    //alert('Your Name must contanin capital and Small latters ')
-
     return false
   }
 }
@@ -56,7 +52,6 @@ function newusernameCheck () {
   if (newusernamevalidate.test(newusername.value)) {
     return true
   } else {
-    //alert('Your Username must contanin capital and Small latters ')
     return false
   }
 }
@@ -70,7 +65,6 @@ function confirmPasswordCheck () {
     console.log(messege.innerHTML = 'not matching')
   }
 }
-console.log(passWord);
 
 passWord.addEventListener('keyup', passwordCheck)
 newusername.addEventListener('keyup', usernameCheck)

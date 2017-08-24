@@ -6,16 +6,16 @@ const {
 } = require('./helpers/db.js');
 
 // //////// checkUser test ///// qamar
-// test('Testing the checkuser function Query', (t) => {
-//   functions.checkUser('qqq', (err, data) => {
-//     if (err) {
-//       t.notOk(err);
-//     } else {
-//       t.equal(data[0].usaname, 'qqq', 'should the user if the user exists');
-//       t.end();
-//     }
-//   });
-// });
+test('Testing the checkuser function Query', (t) => {
+  functions.checkUser('qqq', (err, data) => {
+    if (err) {
+      t.notOk(err);
+    } else {
+      t.equal(data[0].usaname, 'qqq', 'should the user if the user exists');
+      t.end();
+    }
+  });
+});
 
  // ////// LOG-IN test //// qamar
 
@@ -82,7 +82,7 @@ test('Add New Topic', (t) => {
 test('get topcis', (t) => {
   functions.getTopics((err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
       var actual = res[0];
       var expected = {
@@ -105,9 +105,8 @@ test('Add New Card: addCard', (t) => {
 
   functions.addCard(obj, (err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
-      console.log(res.rows);
       t.deepEqual(res.command, 'INSERT', 'should run query type INSERT');
 
       selectLastAdded('cards', (err, res) => {
@@ -128,7 +127,7 @@ test('Add New Card: addCard', (t) => {
 test('get user topcis', (t) => {
   functions.getUserTopics(1, (err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
       var actual = res[0];
       var expected = {
@@ -152,7 +151,7 @@ test('Delete exists card', (t) => {
   };
   functions.addCard(obj, (err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
       selectLastAdded('cards', (err, res) => {
         if (err) {
@@ -161,12 +160,12 @@ test('Delete exists card', (t) => {
         const newCard = res[0];
         functions.deleteCard(newCard, (err, res) => {
           if (err) {
-            console.log(err);
+            t.notOk(err);
           } else {
             t.deepEqual(res.command, 'DELETE', 'should run query type DELETE');
             selectById('cards', newCard.id, (err, res) => {
               if (err) {
-                console.log(err);
+                t.notOk(err);
               }
               t.equal(res.length, 0, `should delete new card (with id ${newCard.id})`);
               t.end();
@@ -188,7 +187,7 @@ test(' Update exists card ', (t) => {
   };
   functions.addCard(obj, (err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
       selectLastAdded('cards', (err, res) => {
         if (err) {
@@ -197,12 +196,12 @@ test(' Update exists card ', (t) => {
         const newCard = res[0];
         functions.UpdateCard(newCard, (err, res) => {
           if (err) {
-            console.log(err);
+            t.notOk(err);
           } else {
             t.deepEqual(res.command, 'UPDATE', 'should run query type UPDATE');
             selectById('cards', newCard.id, (err, res) => {
               if (err) {
-                console.log(err);
+                t.notOk(err);
               } else {
                 t.equal(res[0].content, newCard.content, `should Update new card (with id ${newCard.id})`);
                 t.end();
