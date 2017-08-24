@@ -33,8 +33,8 @@ test('Testing the login function Query', (t) => {
     // //////// Register test  //// qamar
 test('Testing the register function Query', (t) => {
   var obj2 = {
-    name: 'uiii',
-    usaname: 'uiii',
+    name: 'io',
+    username: 'pp',
     password: '116'
   };
   functions.getUsers((err, res) => {
@@ -47,7 +47,7 @@ test('Testing the register function Query', (t) => {
         } else {
           functions.getUsers((error2, response2) => {
             if (error2) {
-              console.log(error2);
+              t.notOk(error2);
             } else {
               t.notEqual(res, response2, 'The length of the table should not be the same');
               t.end();
@@ -69,7 +69,7 @@ test('Add New Topic', (t) => {
 
   functions.addTopic(obj, (err, res) => {
     if (err) {
-      console.log(err);
+      t.notOk(err);
     } else {
       t.deepEqual(res.command, 'INSERT', 'should return the inerted object');
       t.end();
